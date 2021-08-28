@@ -1,0 +1,5 @@
+player_1 = "larry"
+player_1_health = 60
+
+puts "#{player_1}'s health is #{player_1_health / 9.0}"
+puts player_1 + '\'s health is ' + player_1_health.to_s
