@@ -1,21 +1,77 @@
-def return_time
-    actual_time = Time.new
-    actual_time.strftime("%I:%M:%S")
+class Player
+    """Class for creating player objects and encapsulate their behavior"""
+    attr_reader :health, :name #Same as Getters
+    attr_writer :name #Same as Setters
+
+    def initialize(name, initial_healt=100)
+        @name = name.capitalize
+        @health = initial_healt
+    end
+
+    def score
+        @health + @name.length
+    end
+
+    def format_player_greeting
+        "I'm #{@name}."
+    end
+
+    def format_player_score
+        "My score is #{score}"
+    end
+
+    def format_player_health
+        "My health is #{@health}."
+    end
+
+    def to_s
+        format_player_greeting + ' ' + format_player_health + ' ' + format_player_score
+    end
+
+    def w00t
+        @health += 15
+        puts "#{@name} got w00ted!"
+    end
+
+    def blam
+        @health -= 10
+        puts "#{@name} got blammed!"
+    end
+
+    #This instance method overwrites the custom name= instance method Ruby defines when attr_writer :name is written inside class scope
+    def name=(new_name)
+        @name = new_name.capitalize
+    end
+    
 end
 
-def format_player_greeting(name)
-    "I'm #{name.capitalize}."
+player_1 = Player.new("larry")
+player_2 = Player.new("moe", 60)
+player_3 = Player.new("curly", 125)
+
+player_3.blam
+puts player_3.to_s
+player_3.w00t
+puts player_3.to_s
+player_3.health
+player_1.name = "lawrence"
+puts player_1.name
+
+players = [player_1, player_2, player_3]
+
+puts "These are the #{players.size} players in the game:\n"
+#Array method way of looping through players array elements
+players.each do |player|
+    player.w00t
+    player.blam
+    puts player
 end
 
-def format_player_health(health=100)
-    "My health is #{health}."
-end
+players.pop
+player_4 = Player.new("shemp", 90)
+players.push(player_4)
 
-def show_players_infos(name, health=100)
-    format_player_greeting(name) + ' ' + format_player_health(health) + "as of #{return_time}"
-end
-
-puts show_players_infos("Larry", 60)
-puts show_players_infos("curly", 125)
-puts show_players_infos("moe")
-puts show_players_infos("shemp", 90)
+#Primitive 'for' way of looping through players array elements => similar to Python
+# for player in players do
+#     puts player
+# end
