@@ -14,6 +14,7 @@ class Game
     end
 
     def play 
+        puts "The game has #{@players.size} players in #{@title}"
         puts @players
 
         @players.each do |player|

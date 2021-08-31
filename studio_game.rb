@@ -3,7 +3,6 @@
 require_relative 'game'
 
 player_1 = Player.new("larry")
-player_2 = Player.new("moe", 60)
 player_3 = Player.new("curly", 125)
 
 knuckleheads = Game.new("Knuckleheads")
