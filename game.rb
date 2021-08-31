@@ -24,3 +24,11 @@ class Game
         end
     end
 end
+
+"""Some example code below on the usage of the Game class"""
+if __FILE__ == $PROGRAM_NAME
+    example_game = Game.new("Call of Duty")
+    this_player = Player.new("Gabi", 65)
+    example_game.add_player(this_player)
+    example_game.play
+end

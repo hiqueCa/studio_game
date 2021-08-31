@@ -44,3 +44,16 @@ class Player
     end
     
 end
+
+"""Some example code to show how the Player class works. 
+if _FILE_ == $0 works just the same as if __name__ == 'main' in python, regarding functionality.
+Every code that is executed below this conditional is executed only if the scope file is ran directly,
+preventing unwanted code to be executed when this file is required inside another main file."""
+if __FILE__ == $PROGRAM_NAME
+    example_player = Player.new("Henry")
+    puts example_player
+    example_player.w00t
+    example_player.blam
+    example_player.name = "Marcus"
+    puts example_player
+end
