@@ -2,10 +2,13 @@ require_relative 'player'
 
 describe Player do
     
+    before do
+        @initial_healt = 80
+        @player = Player.new("gabi", @initial_healt)
+    end
 
     it "Has a capitalized name if name has only lowercase letters" do
-        player = Player.new("gabi", 80)
-        player.name.should == "Gabi"
+        @player.name.should == "Gabi"
     end
 
     it "Has a capitalized name if name has only uppercase letters" do
