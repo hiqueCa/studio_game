@@ -1,7 +1,9 @@
 require_relative 'player'
+require_relative 'die'
+require_relative 'players_life_changer'
 
 class Game 
-    """Class for managing game state and methods in general"""
+    """Class managing game state and methods in general"""
     attr_reader :title
 
     def initialize(title)
@@ -18,11 +20,9 @@ class Game
         puts @players
 
         @players.each do |player|
-            player.w00t
-            player.w00t
-            player.blam
-            puts player
+            PlayersLifeChanger.check_die_number_and_change_players_life(player)
         end
+        puts @players
     end
 end
 

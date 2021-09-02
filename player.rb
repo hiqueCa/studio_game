@@ -38,11 +38,24 @@ class Player
         puts "#{@name} got blammed!"
     end
 
+    def skip
+        puts "#{@name} got skipped!"
+    end
+    
     #This instance method overwrites the custom name= instance method Ruby defines when attr_writer :name is written inside class scope
     def name=(new_name)
         @name = new_name.capitalize
     end
-    
+
+    def strong?
+        """Same as:
+        if @health > 100
+            true
+        else
+            false
+        end """
+        @health > 100
+    end
 end
 
 """Some example code to show how the Player class works. 

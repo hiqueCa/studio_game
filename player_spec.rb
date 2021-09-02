@@ -60,4 +60,26 @@ describe Player do
             @player_1.health.should == @expected_health_after_blam
         end
     end
+
+    context "with predefined initial health of 150" do
+        before do
+            @player = Player.new("random", 150)
+        end
+
+        it "Is a strong player" do
+            @player.should be_strong
+            #Same as doing: @player.strong?.should == true or @player.strong?.should be_true
+        end
+    end
+
+    context "with a predefined initial health of 100" do 
+        before do
+            @player = Player.new("Wally", 100)
+        end
+
+        it "is a wimpy player" do
+            @player.should_not be_strong
+            #Same as doing: @player.strong?.should == false or @player.strong?.should_not be_true
+        end
+    end
 end
