@@ -15,12 +15,15 @@ class Game
         @players.push(player) #Same as doing @players << player
     end
 
-    def play 
-        puts "The game has #{@players.size} players in #{@title}"
+    def play(rounds)
+        puts "The game has #{@players.size} players in #{@title} and will be played in #{rounds} rounds"
         puts @players
 
-        @players.each do |player|
-            PlayersLifeChanger.check_die_number_and_change_players_life(player)
+        1.upto(rounds) do |round| 
+            puts "\nRound N.#{round}"
+            @players.each do |player|
+                PlayersLifeChanger.check_die_number_and_change_players_life(player)
+            end
         end
         puts @players
     end
