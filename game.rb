@@ -28,7 +28,6 @@ class Game
     end
 
     def play(rounds)
-        available_treasures = TreasureTrove::TREASURES
         puts TreasureTrove
         puts "\nThe game has #{@players.size} players in #{@title} and will be played in #{rounds} rounds"
         puts @players

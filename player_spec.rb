@@ -1,4 +1,5 @@
 require_relative 'player'
+require_relative 'players_life_changer'
 """File for testing Player class specs using RSpec"""
 
 describe Player do

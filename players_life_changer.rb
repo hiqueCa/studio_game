@@ -19,6 +19,7 @@ module PlayersLifeChanger
         end
 
         found_treasure = TreasureTrove.random
+        player.found_treasures[found_treasure.name] += found_treasure.points
         puts "#{player.name} found a #{found_treasure.name} worth #{found_treasure.points} points."
     end
 end

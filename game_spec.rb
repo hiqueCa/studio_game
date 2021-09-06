@@ -1,5 +1,6 @@
 require_relative 'game'
 require_relative 'die'
+require_relative 'treasure_trove'
 
 describe Game do
     
@@ -20,6 +21,10 @@ describe Game do
 
     context "can have more than one round" do
         number_of_rounds = 3
+
+        before do
+            @expected_treasure_to_be_found = TreasureTrove::TREASURES[2]
+        end
 
         1.upto(number_of_rounds) do |number_of_round|
             it "increases player health by 15 (w00t) if high number (5 or 6) is rolled in die" do
@@ -50,6 +55,12 @@ describe Game do
                 @game.play(number_of_round)
         
                 @player.health.should == @initial_healt - (@blam_life_decrease * number_of_round)
+            end
+
+            it "correclty updates player's treasure hash with found treasure points" do
+                TreasureTrove.stub(:random).and_return(@expected_treasure_to_be_found)
+                @game.play(number_of_round)
+                @player.found_treasures[@expected_treasure_to_be_found.name].should == @expected_treasure_to_be_found.points * number_of_round
             end
         end
     end

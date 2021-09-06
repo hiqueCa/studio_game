@@ -2,10 +2,12 @@ class Player
     """Class for creating player objects and encapsulate their behavior"""
     attr_reader :health, :name #Same as Getters
     attr_writer :name #Same as Setters
+    attr_accessor :found_treasures
 
     def initialize(name, initial_healt=100)
         @name = name.capitalize
         @health = initial_healt
+        @found_treasures = Hash.new(0)
     end
 
     def score
