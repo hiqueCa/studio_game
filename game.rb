@@ -2,6 +2,7 @@ require_relative 'player'
 require_relative 'die'
 require_relative 'players_life_changer'
 require_relative 'player_classifier'
+require_relative 'treasure_trove'
 
 class Game 
     """Class managing game state and methods in general"""
@@ -18,13 +19,18 @@ class Game
 
     def show_statistics
         final_categories = @players.partition {|player| player.strong?}
-        puts "\n#{@title} statistics:"
-        
-        PlayersStatisticsOutputer.show_players_statistics(final_categories)
+
+        puts "\n#{@title} statistics"
+        PlayersClassifier.show_players_statistics(final_categories)
+
+        puts "\n#{@title} High Scores:"
+        PlayersClassifier.show_classified_players_high_scores(@players)
     end
 
     def play(rounds)
-        puts "The game has #{@players.size} players in #{@title} and will be played in #{rounds} rounds"
+        available_treasures = TreasureTrove::TREASURES
+        puts TreasureTrove
+        puts "\nThe game has #{@players.size} players in #{@title} and will be played in #{rounds} rounds"
         puts @players
 
         1.upto(rounds) do |round| 

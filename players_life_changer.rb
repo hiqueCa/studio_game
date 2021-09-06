@@ -17,6 +17,9 @@ module PlayersLifeChanger
         else
             player.w00t
         end
+
+        found_treasure = TreasureTrove.random
+        puts "#{player.name} found a #{found_treasure.name} worth #{found_treasure.points} points."
     end
 end
 

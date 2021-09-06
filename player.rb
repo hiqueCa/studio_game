@@ -56,6 +56,10 @@ class Player
         end """
         @health > 100
     end
+
+    def <=> (other_player)
+        other_player.score <=> score
+    end
 end
 
 """Some example code to show how the Player class works. 
