@@ -4,7 +4,8 @@ require_relative 'player'
 module PlayersLifeChanger
     """Module for storing specific methods used inside the game project without the need for empty state classes"""
 
-    def PlayersLifeChanger.check_die_number_and_change_players_life(player)
+    #This module method could be instantiated as self.check_die_number_and_change_players_life(player)
+    def self.check_die_number_and_change_players_life(player)
         die = Die.new()
         number_rolled_in_die = die.roll
 
