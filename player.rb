@@ -1,3 +1,5 @@
+require_relative 'treasure_trove'
+
 class Player
     """Class for creating player objects and encapsulate their behavior"""
     attr_reader :health, :name #Same as Getters
@@ -11,7 +13,17 @@ class Player
     end
 
     def score
-        @health + @name.length
+        @health + treasure_points
+    end
+
+    def treasure_points
+        sum = 0
+
+        @found_treasures.values.each do |points|
+            sum += points
+        end
+
+        sum
     end
 
     def format_player_greeting
@@ -61,6 +73,11 @@ class Player
 
     def <=> (other_player)
         other_player.score <=> score
+    end
+
+    def find_treasure(treasure)
+        puts "#{@name} found a #{treasure.name} worth #{treasure.points} points!"
+        @found_treasures[treasure.name] += treasure.points
     end
 end
 

@@ -9,6 +9,7 @@ describe Player do
         #They might changhe as needed, using contexts when defining the tests
         @initial_healt = 80
         @player = Player.new("gabi", @initial_healt)
+        @found_treasure = Treasure.new(:hammer, 50)
         #Setting the global variable $stdout to a new StringIO object that only stores the I/O results, not showing them on screen
         $stdout = StringIO.new
     end
@@ -40,8 +41,9 @@ describe Player do
         player_2.to_s.should == "I'm Gabi. My health is 100. My score is #{player_2.score}"
     end
 
-    it "Computes it's score as the sum of it's health and name length" do
-        @player.score.should == @player.health + @player.name.length
+    it "Computes it's score as the sum of it's health and treasure points" do
+        @player.find_treasure(@found_treasure)
+        @player.score.should == @player.health + @found_treasure.points
     end
 
     context "Expected healths created for testing w00t and blam methods" do

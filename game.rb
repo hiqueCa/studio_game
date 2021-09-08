@@ -17,6 +17,17 @@ class Game
         @players.push(player) #Same as doing @players << player
     end
 
+    def treasure_points_statistics
+        @players.each do |player|
+            puts "\n#{player.name}'s point totals:\n"
+            puts "#{player.treasure_points} grand total points divided into:"
+
+            player.found_treasures.each do |treasure, points|
+                puts "*#{points} points from #{treasure}.\n"
+            end
+        end
+    end
+
     def show_statistics
         final_categories = @players.partition {|player| player.strong?}
 
@@ -25,6 +36,8 @@ class Game
 
         puts "\n#{@title} High Scores:"
         PlayersClassifier.show_classified_players_high_scores(@players)
+
+        treasure_points_statistics
     end
 
     def play(rounds)
@@ -36,9 +49,21 @@ class Game
             puts "\nRound N.#{round}"
             @players.each do |player|
                 PlayersLifeChanger.check_die_number_and_change_players_life(player)
+                found_treasure = TreasureTrove.random
+                player.find_treasure(found_treasure)
             end
         end
         puts @players
+    end
+
+    def total_treasure_points
+        total_points = 0
+
+        @players.each do |player|
+            total_points += player.treasure_points
+        end
+
+        total_points
     end
 end
 

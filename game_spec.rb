@@ -59,8 +59,18 @@ describe Game do
 
             it "correclty updates player's treasure hash with found treasure points" do
                 TreasureTrove.stub(:random).and_return(@expected_treasure_to_be_found)
+
                 @game.play(number_of_round)
+
                 @player.found_treasures[@expected_treasure_to_be_found.name].should == @expected_treasure_to_be_found.points * number_of_round
+            end
+
+            it "calculates the correct amount of total treasure points found by players through the whole game" do
+                1.upto(number_of_round) do
+                    @player.find_treasure(@expected_treasure_to_be_found)
+                end
+
+                @game.total_treasure_points.should == @expected_treasure_to_be_found.points * number_of_round
             end
         end
     end
