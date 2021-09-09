@@ -13,18 +13,46 @@ class Game
         @players = Array.new #Explicit way of creating new arry in Ruby == @players = []
     end
 
+    def read_each_player_from_file(from_file)
+        File.readlines(from_file).each do |line|
+            player = Player.create_player_from_csv(line)
+            yield player
+        end
+    end
+
+    def load_players(from_file)
+        read_each_player_from_file(from_file) do |player|
+            puts "Adding #{player.name}..."
+            add_player(player)
+            puts "#{player.name} added!"
+        end
+    end
+
+    def save_high_scores(to_file = "high_scores.txt")
+        File.open(to_file, "w") do |file|
+            file.puts "#{@title} High Scores:"
+            sorted_players = @players.sort
+            sorted_players.each do |player|
+                player_formatted_string = player.format_player_high_score_output
+                file.puts player_formatted_string
+            end
+        end
+    end
+
     def add_player(player)
         @players.push(player) #Same as doing @players << player
     end
 
     def treasure_points_statistics
-        @players.each do |player|
+        @players.sort.each do |player|
             puts "\n#{player.name}'s point totals:\n"
-            puts "#{player.treasure_points} grand total points divided into:"
 
-            player.found_treasures.each do |treasure, points|
-                puts "*#{points} points from #{treasure}.\n"
+            player.each_found_treasure do |treasure|
+                puts "#{treasure.points} points from #{treasure.name}.\n"
             end
+
+            puts "-------------------"
+            puts "#{player.treasure_points} grand total points"
         end
     end
 
@@ -42,7 +70,7 @@ class Game
 
     def play(rounds)
         puts TreasureTrove
-        puts "\nThe game has #{@players.size} players in #{@title} and will be played in #{rounds} rounds"
+        puts "\nThe game #{@title} has #{@players.size} players and will be played in #{rounds} rounds"
         puts @players
 
         1.upto(rounds) do |round| 

@@ -19,8 +19,7 @@ module PlayersClassifier
     def self.show_classified_players_high_scores(players)
         sorted_players = players.sort
         sorted_players.each do |player|
-            player_formatted_string = "#{player.name}".ljust(10, '.') + "#{player.score}"
-            
+            player_formatted_string = player.format_player_high_score_output
             puts player_formatted_string
         end
     end

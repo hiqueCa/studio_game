@@ -4,7 +4,6 @@ class Player
     """Class for creating player objects and encapsulate their behavior"""
     attr_reader :health, :name #Same as Getters
     attr_writer :name #Same as Setters
-    attr_accessor :found_treasures
 
     def initialize(name, initial_healt=100)
         @name = name.capitalize
@@ -16,6 +15,11 @@ class Player
         @health + treasure_points
     end
 
+    def self.create_player_from_csv(string)
+        name, health = string.split(',')
+        Player.new(name, Integer(health))
+    end
+
     def treasure_points
         sum = 0
 
@@ -24,6 +28,11 @@ class Player
         end
 
         sum
+    end
+
+    def format_player_high_score_output
+        player_formatted_name = "#{@name}".ljust(10, '.')
+        "#{player_formatted_name}#{score}"
     end
 
     def format_player_greeting
@@ -78,6 +87,15 @@ class Player
     def find_treasure(treasure)
         puts "#{@name} found a #{treasure.name} worth #{treasure.points} points!"
         @found_treasures[treasure.name] += treasure.points
+    end
+
+    def each_found_treasure
+        """Iterator method that holds the Treasure object pointed to by treasure variable and allows it to be used by a block"""
+        """Iterator methods are defined by yield methods!"""
+        @found_treasures.each do |treasure_name, points|
+            treasure = Treasure.new(treasure_name, points)
+            yield treasure
+        end
     end
 end
 
