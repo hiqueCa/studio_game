@@ -1,10 +1,16 @@
 # require_relative is used when the files required are stored inside the same folder as the main file
 # requiring game.rb file is enough as player.rb file is required inside game.rb file, so its required automatticaly when requiring game.rb
 require_relative 'game'
+require_relative 'clumsy_player'
+require_relative 'berserker_player'
 
 default_players_file = "players.csv"
 
 knuckleheads = Game.new("Knuckleheads")
+klutz = ClumsyPlayer.new("klutz", 105)
+ariana = BerserkerPlayer.new("ariana")
+knuckleheads.add_player(klutz)
+knuckleheads.add_player(ariana)
 knuckleheads.load_players(ARGV.shift || default_players_file)
 
 loop do
