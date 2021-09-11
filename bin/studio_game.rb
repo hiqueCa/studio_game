@@ -6,9 +6,9 @@ require_relative 'berserker_player'
 
 default_players_file = "players.csv"
 
-knuckleheads = Game.new("Knuckleheads")
-klutz = ClumsyPlayer.new("klutz", 105)
-ariana = BerserkerPlayer.new("ariana")
+knuckleheads = HenrisStudioGame::Game.new("Knuckleheads")
+klutz = HenrisStudioGame::ClumsyPlayer.new("klutz", 105)
+ariana = HenrisStudioGame::BerserkerPlayer.new("ariana")
 knuckleheads.add_player(klutz)
 knuckleheads.add_player(ariana)
 knuckleheads.load_players(ARGV.shift || default_players_file)
