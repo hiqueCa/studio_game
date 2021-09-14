@@ -1,10 +1,11 @@
-# require_relative is used when the files required are stored inside the same folder as the main file
-# requiring game.rb file is enough as player.rb file is required inside game.rb file, so its required automatticaly when requiring game.rb
-require_relative 'game'
-require_relative 'clumsy_player'
-require_relative 'berserker_player'
+#!/usr/bin/env ruby
 
-default_players_file = "players.csv"
+
+require_relative '../lib/studio_game/game'
+require_relative '../lib/studio_game/clumsy_player'
+require_relative '../lib/studio_game/berserker_player'
+
+default_players_file = File.join(File.dirname(__FILE__), "players.csv")
 
 knuckleheads = HenrisStudioGame::Game.new("Knuckleheads")
 klutz = HenrisStudioGame::ClumsyPlayer.new("klutz", 105)
